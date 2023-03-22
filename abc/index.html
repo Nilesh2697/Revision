@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #content {
+        height: 100vh;
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+</html>
+<script>
+  const content = document.querySelector("#content");
+
+  content.addEventListener("scroll", () => {
+    if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
+      // Load more content
+      fetch("https://fakestoreapi.com/products/1")
+        .then((response) => response.text())
+        .then((html) => {
+          content.innerHTML += html;
+        });
+    }
+  });
+</script>
